@@ -1,20 +1,22 @@
 import React from "react";
-import { FlatList, View, StyleSheet } from "react-native";
+import { FlatList, View, StyleSheet, Text } from "react-native";
 import PlaceItem from "./PlaceItem";
 
 function PlacesList({ places }) {
   if (!places || places.length === 0) {
-    <View style={styles.fallbackContainer}>
-      <Text style={styles.fallbackText}>
-        No Places added yet - Start adding some!
-      </Text>
-    </View>;
+    return (
+      <View style={styles.fallbackContainer}>
+        <Text style={styles.fallbackText}>
+          No Places added yet - Start adding some!
+        </Text>
+      </View>
+    );
   }
   return (
     <FlatList
       data={places}
       keyExtractor={(item) => item.id}
-      renderItem={({}) => <PlaceItem okace={item} />}
+      renderItem={({}) => <PlaceItem place={item} />}
     />
   );
 }
@@ -28,5 +30,6 @@ const styles = StyleSheet.create({
   },
   fallbackText: {
     fontSize: 16,
+    fontWeight: "bold",
   },
 });
